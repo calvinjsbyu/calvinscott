@@ -333,21 +333,60 @@ a,a:hover, .overlay, img, .form-control,  .form-control:hover, button{
    Header Section
    ========================================================================== */
 .header-section{
-    background-color: transparent;
+    background: transparent;
     width: 100%;
-    height: 80px;
+    height: 300px;
     z-index: 999;
     position: fixed;
     left: 0;
     top: 0;
     padding: 10px 0;
+    pointer-events: none;
+    transition: height 0.5s, padding 0.5s;
 }
-.navbar-fixed-top.header-section{
+/* Gradient overlay that fades out when scrolling */
+.header-section::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 300px;
+    background: linear-gradient(to bottom, #111 0px, transparent 300px);
+    opacity: 1;
+    transition: opacity 0.5s;
+    z-index: -1;
+}
+.navbar-fixed-top.header-section::before{
+    opacity: 0;
+}
+.header-section .navbar,
+.header-section .navbar *{
+    pointer-events: auto;
+}
+/* Solid bar that fades in when scrolling */
+.header-section::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
     background-color: #111;
     box-shadow: 0px 16px 28px 0px rgba(0, 0, 0, 0.05);
+    opacity: 0;
+    transition: opacity 0.5s;
+    z-index: -1;
+}
+.navbar-fixed-top.header-section{
+    background: transparent;
     height: 70px;
     border-bottom: 0;
     padding: 0;
+    pointer-events: auto;
+}
+.navbar-fixed-top.header-section::after{
+    opacity: 1;
 }
 .mainmenu .download-btn{
     background-color: #ef5560;
@@ -510,10 +549,7 @@ ul.nav > li > a.active{
    Hero Section
    ========================================================================== */
 .hero-section{
-    background-image: url(../img/hero-background.jpg);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
+    background-color: #111;
     width: 100%;
     height: 100vh;
     position: relative;
@@ -568,26 +604,26 @@ ul.nav > li > a.active{
 
 /* Down Arrow Animation */
 @-webkit-keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {-webkit-transform: translateY(0);} 
-    40% {-webkit-transform: translateY(-20px);}
-    60% {-webkit-transform: translateY(-10px);}
+    0%, 20%, 50%, 80%, 100% {-webkit-transform: translateX(-50%) translateY(0);}
+    40% {-webkit-transform: translateX(-50%) translateY(-20px);}
+    60% {-webkit-transform: translateX(-50%) translateY(-10px);}
 }
- 
+
 @-moz-keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {-moz-transform: translateY(0);}
-    40% {-moz-transform: translateY(-20px);}
-    60% {-moz-transform: translateY(-10px);}
+    0%, 20%, 50%, 80%, 100% {-moz-transform: translateX(-50%) translateY(0);}
+    40% {-moz-transform: translateX(-50%) translateY(-20px);}
+    60% {-moz-transform: translateX(-50%) translateY(-10px);}
 }
  
 @-o-keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {-o-transform: translateY(0);}
-    40% {-o-transform: translateY(-20px);}
-    60% {-o-transform: translateY(-10px);}
+    0%, 20%, 50%, 80%, 100% {-o-transform: translateX(-50%) translateY(0);}
+    40% {-o-transform: translateX(-50%) translateY(-20px);}
+    60% {-o-transform: translateX(-50%) translateY(-10px);}
 }
 @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-    40% {transform: translateY(-20px);}
-    60% {transform: translateY(-10px);}
+    0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);}
+    40% {transform: translateX(-50%) translateY(-20px);}
+    60% {transform: translateX(-50%) translateY(-10px);}
 }
 /* ==========================================================================
    About Section
@@ -834,6 +870,13 @@ ul.nav > li > a.active{
     height: 100%;
     z-index: 0;
 }
+.hero-section{
+    /* CSS custom properties for spotlight - updated via JS */
+    --mouse-x: -9999px;
+    --mouse-y: -9999px;
+    --spotlight-circle: 100px;
+    --spotlight-feather: 300px;
+}
 .hero-section .container{
     position: relative;
     z-index: 2;
@@ -858,7 +901,7 @@ ul.nav > li > a.active{
     backdrop-filter: grayscale(100%);
     z-index: 1;
     pointer-events: none;
-    /* SVG clip-path with external reference - updated via JS */
-    -webkit-clip-path: url(#spotlight-clip);
-    clip-path: url(#spotlight-clip);
+    /* Radial gradient mask: transparent center fades to opaque edges */
+    -webkit-mask-image: radial-gradient(circle var(--spotlight-feather) at var(--mouse-x) var(--mouse-y), transparent var(--spotlight-circle), black var(--spotlight-feather));
+    mask-image: radial-gradient(circle var(--spotlight-feather) at var(--mouse-x) var(--mouse-y), transparent var(--spotlight-circle), black var(--spotlight-feather));
 }

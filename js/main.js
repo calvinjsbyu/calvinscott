@@ -88,30 +88,40 @@
 =========================================================================*/
 (function() {
     var heroSection = document.getElementById('home');
-    var spotlightPath = document.getElementById('spotlight-path');
-    var spotlightRadius = 200; // pixels
 
-    if (heroSection && spotlightPath) {
-        heroSection.addEventListener('mousemove', function(e) {
+    if (heroSection) {
+        function updateSpotlightSize() {
+            var pageWidth = window.innerWidth;
+            var circleRadius = pageWidth / 9;  // 1/9 of page width
+            var featherRadius = circleRadius * 4;  // 4x the circle radius
+
+            heroSection.style.setProperty('--spotlight-circle', circleRadius + 'px');
+            heroSection.style.setProperty('--spotlight-feather', featherRadius + 'px');
+        }
+
+        // Set initial size
+        updateSpotlightSize();
+
+        // Update on window resize
+        window.addEventListener('resize', updateSpotlightSize);
+
+        // Listen on document to capture mouse even when over header
+        document.addEventListener('mousemove', function(e) {
             var rect = heroSection.getBoundingClientRect();
-            // Convert to percentage (0-1) for objectBoundingBox units
-            var cx = (e.clientX - rect.left) / rect.width;
-            var cy = (e.clientY - rect.top) / rect.height;
-            var rx = spotlightRadius / rect.width;
-            var ry = spotlightRadius / rect.height;
+            var x = e.clientX - rect.left;
+            var y = e.clientY - rect.top;
 
-            // Create path: full rectangle minus circle (using arc)
-            var path = 'M0,0 H1 V1 H0 Z ' +
-                       'M' + cx + ',' + (cy - ry) + ' ' +
-                       'a' + rx + ',' + ry + ' 0 1,0 0,' + (2*ry) + ' ' +
-                       'a' + rx + ',' + ry + ' 0 1,0 0,' + (-2*ry);
-
-            spotlightPath.setAttribute('d', path);
-        });
-
-        heroSection.addEventListener('mouseleave', function() {
-            // Remove hole - just full rectangle (grayscale covers everything)
-            spotlightPath.setAttribute('d', 'M0,0 H1 V1 H0 Z');
+            // Check if mouse is within hero section bounds
+            if (e.clientX >= rect.left && e.clientX <= rect.right &&
+                e.clientY >= rect.top && e.clientY <= rect.bottom) {
+                // Update CSS custom properties on the hero section
+                heroSection.style.setProperty('--mouse-x', x + 'px');
+                heroSection.style.setProperty('--mouse-y', y + 'px');
+            } else {
+                // Move spotlight off-screen when mouse leaves hero bounds
+                heroSection.style.setProperty('--mouse-x', '-9999px');
+                heroSection.style.setProperty('--mouse-y', '-9999px');
+            }
         });
     }
 })();
@@ -119,7 +129,9 @@
 /*=========================================================================
     Google Map Settings
 =========================================================================*/
-    google.maps.event.addDomListener(window, 'load', init);
+    if (typeof google !== 'undefined' && google.maps) {
+        google.maps.event.addDomListener(window, 'load', init);
+    }
 
     function init() {
 
