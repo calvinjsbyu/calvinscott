@@ -69,6 +69,7 @@
 		</header> <!-- Header -->
 
         <section id="home" class="section hero-section d-flex align-items-center">
+            <div id="video-bg" class="video-background" data-property="{videoURL:'https://youtu.be/ClIBmBT9clU', containment:'#home', showControls:false, autoPlay:true, loop:true, mute:true, startAt:0, stopMovieOnBlur:false, opacity:1, quality:'default'}"></div>
             <div class="container">
                 <div class="hero-content text-center">
                     <h5>WEB DEVELOPER & UX DESIGNER</h5>
@@ -84,7 +85,7 @@
                 </div>
             </div>
             <div class="down-arrow">
-                <a data-scroll href="#works" class="arrow-animated">Scroll Down <i class="ti-arrow-down"></i></a>
+                <a data-scroll href="#works" class="arrow-animated"><span>Scroll</span><span>Down</span><i class="ti-arrow-down"></i></a>
             </div>
         </section><!-- hero-section -->
 
@@ -93,14 +94,14 @@
                 <div class="row portfolio-wrap d-flex align-items-center">
                     <div class="col-md-4 xs-padding">
                         <div class="section-heading pdl-80">
-                            <h2 class="mb-20">Portfolio</h2>
+                            <h2 class="mb-20">Advertising Work</h2>
                             <p class="mb-20">I'm a Creative Designer and I make things work.<br> Turning your dreams into reality.</p>
                             <a href="#" class="default-btn">Our All Works</a>
                         </div>
                     </div>
                     <div class="col-md-8">
                         <div class="row portfolio-items">
-                            <div class="col-lg-4 col-sm-6">
+                            <div class="col-lg-6 col-sm-6">
                                 <div class="portfolio-box">
                                     <div class="portfolio-thumb">
                                         <img src="img/prtf-1.jpg" alt="img">
@@ -112,7 +113,7 @@
                                     </a>
                                 </div>
                             </div><!-- Portfolio-1 -->
-                            <div class="col-lg-4 col-sm-6">
+                            <div class="col-lg-6 col-sm-6">
                                 <div class="portfolio-box">
                                     <div class="portfolio-thumb">
                                         <img src="img/prtf-2.jpg" alt="img">
@@ -124,7 +125,7 @@
                                     </a>
                                 </div>
                             </div><!-- Portfolio-2 -->
-                            <div class="col-lg-4 col-sm-6">
+                            <div class="col-lg-6 col-sm-6">
                                 <div class="portfolio-box">
                                     <div class="portfolio-thumb">
                                         <img src="img/prtf-3.gif" alt="img">
@@ -136,7 +137,7 @@
                                     </a>
                                 </div>
                             </div><!-- Portfolio-3 -->
-                            <div class="col-lg-4 col-sm-6">
+                            <div class="col-lg-6 col-sm-6">
                                 <div class="portfolio-box">
                                     <div class="portfolio-thumb">
                                         <img src="img/prtf-4.jpg" alt="img">
@@ -148,30 +149,6 @@
                                     </a>
                                 </div>
                             </div><!-- Portfolio-4 -->
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="portfolio-box">
-                                    <div class="portfolio-thumb">
-                                        <img src="img/prtf-5.jpg" alt="img">
-                                    </div>
-                                    <a href="img/prtf-5.jpg" class="hover img-popup" data-gall="galleryimg">
-                                        <div>
-                                            <img src="img/zoom.png" alt="icon">
-                                        </div>
-                                    </a>
-                                </div>
-                            </div><!-- Portfolio-5 -->
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="portfolio-box">
-                                    <div class="portfolio-thumb">
-                                        <img src="img/prtf-6.jpg" alt="img">
-                                    </div>
-                                    <a href="img/prtf-6.jpg" class="hover img-popup" data-gall="galleryimg">
-                                        <div>
-                                            <img src="img/zoom.png" alt="icon">
-                                        </div>
-                                    </a>
-                                </div>
-                            </div><!-- Portfolio-6 -->
                         </div>
                     </div>
                 </div>
@@ -215,6 +192,8 @@
 		<script src="js/vendor/jquery.simple-text-rotator.js"></script>
 		<!-- Wow JS -->
 		<script src="js/vendor/wow.min.js"></script>
+		<!-- YTPlayer JS -->
+		<script src="js/vendor/jquery.mb.YTPlayer.js"></script>
 		<!-- Main JS -->
 		<script src="js/main.js"></script>
 
