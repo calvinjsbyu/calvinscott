@@ -845,6 +845,7 @@ ul.nav > li > a.active{
     width: 100%;
     z-index: 2;
 }
+/* Grayscale overlay with spotlight hole */
 .hero-section::before{
     content: '';
     position: absolute;
@@ -852,8 +853,12 @@ ul.nav > li > a.active{
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(5px);
+    background: rgba(0, 0, 0, 0.1);
+    -webkit-backdrop-filter: grayscale(100%);
+    backdrop-filter: grayscale(100%);
     z-index: 1;
+    pointer-events: none;
+    /* SVG clip-path with external reference - updated via JS */
+    -webkit-clip-path: url(#spotlight-clip);
+    clip-path: url(#spotlight-clip);
 }

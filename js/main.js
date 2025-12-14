@@ -81,7 +81,40 @@
 =========================================================================*/
     if ($("#video-bg").length) {
         $("#video-bg").YTPlayer();
-    } 
+    }
+
+/*=========================================================================
+    Spotlight Effect
+=========================================================================*/
+(function() {
+    var heroSection = document.getElementById('home');
+    var spotlightPath = document.getElementById('spotlight-path');
+    var spotlightRadius = 200; // pixels
+
+    if (heroSection && spotlightPath) {
+        heroSection.addEventListener('mousemove', function(e) {
+            var rect = heroSection.getBoundingClientRect();
+            // Convert to percentage (0-1) for objectBoundingBox units
+            var cx = (e.clientX - rect.left) / rect.width;
+            var cy = (e.clientY - rect.top) / rect.height;
+            var rx = spotlightRadius / rect.width;
+            var ry = spotlightRadius / rect.height;
+
+            // Create path: full rectangle minus circle (using arc)
+            var path = 'M0,0 H1 V1 H0 Z ' +
+                       'M' + cx + ',' + (cy - ry) + ' ' +
+                       'a' + rx + ',' + ry + ' 0 1,0 0,' + (2*ry) + ' ' +
+                       'a' + rx + ',' + ry + ' 0 1,0 0,' + (-2*ry);
+
+            spotlightPath.setAttribute('d', path);
+        });
+
+        heroSection.addEventListener('mouseleave', function() {
+            // Remove hole - just full rectangle (grayscale covers everything)
+            spotlightPath.setAttribute('d', 'M0,0 H1 V1 H0 Z');
+        });
+    }
+})();
 
 /*=========================================================================
     Google Map Settings
