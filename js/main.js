@@ -81,6 +81,12 @@
 =========================================================================*/
     if ($("#video-bg").length) {
         $("#video-bg").YTPlayer();
+        // Remove placeholder background image after YTPlayer initializes
+        setTimeout(function() {
+            $('body').css('background-image', 'none');
+            $('.mbYTP_wrapper').css('background-image', 'none');
+            $('.inline_YTPlayer').css('background-image', 'none');
+        }, 100);
     }
 
 /*=========================================================================

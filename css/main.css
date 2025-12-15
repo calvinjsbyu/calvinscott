@@ -549,10 +549,13 @@ ul.nav > li > a.active{
    Hero Section
    ========================================================================== */
 .hero-section{
-    background-color: #111;
+    background-color: transparent;
     width: 100%;
     height: 100vh;
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
 }
 .hero-content h1{
     font-size: 80px;
@@ -690,6 +693,9 @@ ul.nav > li > a.active{
    ========================================================================== */
 .portfolio-section{
     padding-bottom: 0;
+    position: relative;
+    z-index: 1;
+    margin-top: 100vh;
 }
 .portfolio-section .section-heading p{
     color: #ddd;
@@ -740,9 +746,11 @@ ul.nav > li > a.active{
 /* ==========================================================================
    CTA Section
    ========================================================================== */
-.cta-section{}
 .cta-section{
     padding: 130px 0;
+    position: relative;
+    z-index: 1;
+    background-color: #050505;
 }
 .cta-section .cta-content h2{
     font-size: 40px;
@@ -808,6 +816,8 @@ ul.nav > li > a.active{
     color: #fff;
     text-align: center;
     padding: 30px 0;
+    position: relative;
+    z-index: 1;
 }
 .footer-section p{
     text-transform: uppercase;
@@ -863,12 +873,23 @@ ul.nav > li > a.active{
    Video Background
    ========================================================================== */
 .video-background{
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    z-index: 0;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+}
+/* Ensure YTPlayer wrapper is also fixed */
+.mbYTP_wrapper,
+.inline_YTPlayer {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    z-index: -1 !important;
+    background-image: none !important;
+    background-color: #111 !important;
 }
 .hero-section{
     /* CSS custom properties for spotlight - updated via JS */
@@ -891,11 +912,11 @@ ul.nav > li > a.active{
 /* Grayscale overlay with spotlight hole */
 .hero-section::before{
     content: '';
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     background: rgba(0, 0, 0, 0.1);
     -webkit-backdrop-filter: grayscale(100%);
     backdrop-filter: grayscale(100%);
@@ -904,4 +925,85 @@ ul.nav > li > a.active{
     /* Radial gradient mask: transparent center fades to opaque edges */
     -webkit-mask-image: radial-gradient(circle var(--spotlight-feather) at var(--mouse-x) var(--mouse-y), transparent var(--spotlight-circle), black var(--spotlight-feather));
     mask-image: radial-gradient(circle var(--spotlight-feather) at var(--mouse-x) var(--mouse-y), transparent var(--spotlight-circle), black var(--spotlight-feather));
+}
+
+/*=========================================================================
+    Portfolio Modal Styles
+=========================================================================*/
+.portfolio-modal-content {
+    background: #1a1a1a;
+    max-width: 800px;
+    width: 90vw;
+}
+
+.portfolio-modal-content .modal-inner {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+.portfolio-modal-content .modal-image {
+    flex: 0 0 45%;
+    max-width: 45%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #111;
+    overflow: hidden;
+}
+
+.portfolio-modal-content .modal-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.portfolio-modal-content .modal-text {
+    flex: 0 0 55%;
+    max-width: 55%;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #fff;
+}
+
+.portfolio-modal-content .modal-text h3 {
+    font-size: 22px;
+    margin-bottom: 8px;
+    color: #fff;
+}
+
+.portfolio-modal-content .modal-text .project-category {
+    color: #888;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+.portfolio-modal-content .modal-text p {
+    color: #ccc;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+
+/* Responsive: stack vertically on smaller screens */
+@media (max-width: 768px) {
+    .portfolio-modal-content .modal-inner {
+        flex-direction: column;
+    }
+
+    .portfolio-modal-content .modal-image {
+        flex: 0 0 auto;
+        max-width: 100%;
+        max-height: 250px;
+    }
+
+    .portfolio-modal-content .modal-text {
+        flex: 0 0 auto;
+        max-width: 100%;
+        padding: 20px;
+    }
 }

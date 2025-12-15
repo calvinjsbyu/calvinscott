@@ -68,12 +68,14 @@
             </div>
 		</header> <!-- Header -->
 
+        <!-- Fixed Video Background -->
+        <div id="video-bg" class="video-background" data-property="{videoURL:'https://youtu.be/ZkoUnjfsEDA', containment:'body', showControls:false, autoPlay:true, loop:true, mute:true, startAt:0, stopMovieOnBlur:false, opacity:1, quality:'default'}"></div>
+
         <section id="home" class="section hero-section d-flex align-items-center">
-            <div id="video-bg" class="video-background" data-property="{videoURL:'https://youtu.be/ZkoUnjfsEDA', containment:'#home', showControls:false, autoPlay:true, loop:true, mute:true, startAt:0, stopMovieOnBlur:false, opacity:1, quality:'default'}"></div>
             <div class="container">
                 <div class="hero-content text-center">
                     <h5>WEB DEVELOPER & UX DESIGNER</h5>
-                    <h1><span class="rotate">Creativity, Designing, Developing</span></h1>
+                    <h1><span class="rotate">Cool, Cooler, Coolest</span></h1>
                     <p>I'm a Creative Designer and I make things work.<br> Turning your dreams into reality.</p>
                     <ul class="social-link">
                         <li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -106,7 +108,7 @@
                                     <div class="portfolio-thumb">
                                         <img src="img/prtf-1.jpg" alt="img">
                                     </div>
-                                    <a href="img/prtf-1.jpg" class="hover img-popup" data-gall="galleryimg">
+                                    <a href="#portfolio-modal-1" class="hover img-popup" data-vbtype="inline" data-gall="galleryimg">
                                         <div>
                                             <img src="img/zoom.png" alt="icon">
                                         </div>
@@ -118,7 +120,7 @@
                                     <div class="portfolio-thumb">
                                         <img src="img/prtf-2.jpg" alt="img">
                                     </div>
-                                    <a href="img/prtf-2.jpg" class="hover img-popup" data-gall="galleryimg">
+                                    <a href="#portfolio-modal-2" class="hover img-popup" data-vbtype="inline" data-gall="galleryimg">
                                         <div>
                                             <img src="img/zoom.png" alt="icon">
                                         </div>
@@ -130,7 +132,7 @@
                                     <div class="portfolio-thumb">
                                         <img src="img/prtf-3.gif" alt="img">
                                     </div>
-                                    <a href="img/prtf-3.gif" class="hover img-popup" data-gall="galleryimg">
+                                    <a href="#portfolio-modal-3" class="hover img-popup" data-vbtype="inline" data-gall="galleryimg">
                                         <div>
                                             <img src="img/zoom.png" alt="icon">
                                         </div>
@@ -142,7 +144,7 @@
                                     <div class="portfolio-thumb">
                                         <img src="img/prtf-4.jpg" alt="img">
                                     </div>
-                                    <a href="img/prtf-4.jpg" class="hover img-popup" data-gall="galleryimg">
+                                    <a href="#portfolio-modal-4" class="hover img-popup" data-vbtype="inline" data-gall="galleryimg">
                                         <div>
                                             <img src="img/zoom.png" alt="icon">
                                         </div>
@@ -154,6 +156,63 @@
                 </div>
             </div>
         </section><!-- portfolio-section -->
+
+        <!-- Portfolio Modal Content (Hidden) -->
+        <div id="portfolio-modal-1" class="portfolio-modal-content" style="display:none;">
+            <div class="modal-inner">
+                <div class="modal-image">
+                    <img src="img/prtf-1.jpg" alt="Project 1">
+                </div>
+                <div class="modal-text">
+                    <h3>Project Title One</h3>
+                    <p class="project-category">Advertising / Branding</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="portfolio-modal-2" class="portfolio-modal-content" style="display:none;">
+            <div class="modal-inner">
+                <div class="modal-image">
+                    <img src="img/prtf-2.jpg" alt="Project 2">
+                </div>
+                <div class="modal-text">
+                    <h3>Project Title Two</h3>
+                    <p class="project-category">Digital Marketing</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="portfolio-modal-3" class="portfolio-modal-content" style="display:none;">
+            <div class="modal-inner">
+                <div class="modal-image">
+                    <img src="img/prtf-3.gif" alt="Project 3">
+                </div>
+                <div class="modal-text">
+                    <h3>Project Title Three</h3>
+                    <p class="project-category">Motion Graphics</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="portfolio-modal-4" class="portfolio-modal-content" style="display:none;">
+            <div class="modal-inner">
+                <div class="modal-image">
+                    <img src="img/prtf-4.jpg" alt="Project 4">
+                </div>
+                <div class="modal-text">
+                    <h3>Project Title Four</h3>
+                    <p class="project-category">Video Production</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                </div>
+            </div>
+        </div>
 
         <section class="cta-section padding">
             <div class="container">
