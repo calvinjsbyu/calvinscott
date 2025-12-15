@@ -335,7 +335,7 @@ a,a:hover, .overlay, img, .form-control,  .form-control:hover, button{
 .header-section{
     background: transparent;
     width: 100%;
-    height: 300px;
+    height: 70px;
     z-index: 999;
     position: fixed;
     left: 0;
@@ -344,10 +344,9 @@ a,a:hover, .overlay, img, .form-control,  .form-control:hover, button{
     pointer-events: none;
     transition: height 0.5s, padding 0.5s;
 }
-/* Gradient overlay that fades out when scrolling */
-.header-section::before{
-    content: '';
-    position: absolute;
+/* Large gradient overlay - sits behind portfolio section */
+.header-gradient-bg{
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -355,9 +354,10 @@ a,a:hover, .overlay, img, .form-control,  .form-control:hover, button{
     background: linear-gradient(to bottom, #111 0px, transparent 300px);
     opacity: 1;
     transition: opacity 0.5s;
-    z-index: -1;
+    z-index: 0;
+    pointer-events: none;
 }
-.navbar-fixed-top.header-section::before{
+.header-gradient-bg.fade-out{
     opacity: 0;
 }
 .header-section .navbar,
@@ -726,6 +726,12 @@ ul.nav > li > a.active{
     width: 100%;
     height: 100%;
     object-fit: cover;
+    filter: grayscale(100%);
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+.portfolio-box:hover .portfolio-thumb img{
+    filter: grayscale(0%);
+    transform: scale(1.08);
 }
 .portfolio-box .hover{
     position: absolute;
@@ -733,22 +739,11 @@ ul.nav > li > a.active{
     height: 100%;
     left: 0;
     top: 0;
-    
-    opacity: 0;
-    visibility: hidden;
-    padding: 15px;
+    z-index: 2;
+    cursor: pointer;
 }
 .portfolio-box .hover div{
-    background-color: rgba(255,255,255,0.9);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-}
-.portfolio-box:hover .hover{
-    opacity: 1;
-    visibility: visible;
+    display: none;
 }
 /* ==========================================================================
    CTA Section
@@ -965,9 +960,8 @@ ul.nav > li > a.active{
 .portfolio-modal-container {
     position: relative;
     display: flex;
-    width: 900px;
-    max-width: 95vw;
-    height: 400px;
+    width: 75vw;
+    height: 75vh;
     background: #1a1a1a;
     z-index: 1;
 }
@@ -977,39 +971,128 @@ ul.nav > li > a.active{
     width: 66.666%;
     height: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .modal-main-image {
     flex: 1;
+    height: 100%;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
 
-.modal-main-image img {
+.modal-main-image img,
+.modal-main-image iframe {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.modal-main-image iframe {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    border: none;
 }
 
-.modal-thumbnails {
-    height: 60px;
-    display: flex;
-    gap: 5px;
-    padding: 5px;
-    background: #111;
+/* Slide animations */
+.modal-main-image.slide-out-left img,
+.modal-main-image.slide-out-left iframe {
+    transform: translateX(-100%);
+    opacity: 0;
 }
 
-.modal-thumbnails img {
-    height: 100%;
-    width: auto;
+.modal-main-image.slide-out-right img,
+.modal-main-image.slide-out-right iframe {
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+.modal-main-image.slide-in-left img,
+.modal-main-image.slide-in-left iframe {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.modal-main-image.slide-in-right img,
+.modal-main-image.slide-in-right iframe {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+/* Image caption overlay */
+.image-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 40px 20px 15px;
+    color: #fff;
+    font-size: 14px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.modal-main-image:hover .image-caption {
+    opacity: 1;
+}
+
+/* Navigation arrows */
+.modal-arrow {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 32px;
     cursor: pointer;
+    padding: 10px 15px;
     opacity: 0.6;
     transition: opacity 0.2s;
+    flex-shrink: 0;
 }
 
-.modal-thumbnails img:hover,
-.modal-thumbnails img.active {
+.modal-arrow:hover {
     opacity: 1;
+}
+
+/* Outer navigation arrows - switch between portfolio items */
+.modal-outer-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 48px;
+    cursor: pointer;
+    padding: 20px;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+    z-index: 2;
+}
+
+.modal-outer-arrow:hover {
+    opacity: 1;
+}
+
+.modal-outer-prev {
+    left: calc(12.5vw - 80px);
+}
+
+.modal-outer-next {
+    right: calc(12.5vw - 80px);
+}
+
+.modal-thumbnails .soundcloud-thumb .soundcloud-icon {
+    color: #fff;
+    font-size: 20px;
 }
 
 /* Text section - 1/3 width */
