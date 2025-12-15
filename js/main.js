@@ -133,6 +133,58 @@
 })();
 
 /*=========================================================================
+    Portfolio Modal
+=========================================================================*/
+// Open modal
+$('.portfolio-trigger').on('click', function(e) {
+    e.preventDefault();
+
+    var images = $(this).data('images').split(',');
+    var title = $(this).data('title') || 'Project Title';
+    var category = $(this).data('category') || 'Category';
+    var description = $(this).data('description') || 'Project description.';
+
+    // Set main image
+    $('.modal-main-image img').attr('src', images[0]);
+
+    // Build thumbnails
+    var thumbsHtml = '';
+    images.forEach(function(img, index) {
+        var activeClass = index === 0 ? 'active' : '';
+        thumbsHtml += '<img src="' + img.trim() + '" class="' + activeClass + '" alt="Thumbnail">';
+    });
+    $('.modal-thumbnails').html(thumbsHtml);
+
+    // Set text
+    $('.modal-title').text(title);
+    $('.modal-category').text(category);
+    $('.modal-description').text(description);
+
+    // Show modal
+    $('#portfolio-modal').addClass('active');
+});
+
+// Thumbnail click - change main image
+$(document).on('click', '.modal-thumbnails img', function() {
+    var src = $(this).attr('src');
+    $('.modal-main-image img').attr('src', src);
+    $('.modal-thumbnails img').removeClass('active');
+    $(this).addClass('active');
+});
+
+// Close modal
+$('.portfolio-modal-close, .portfolio-modal-overlay').on('click', function() {
+    $('#portfolio-modal').removeClass('active');
+});
+
+// Close on ESC key
+$(document).on('keydown', function(e) {
+    if (e.key === 'Escape') {
+        $('#portfolio-modal').removeClass('active');
+    }
+});
+
+/*=========================================================================
     Google Map Settings
 =========================================================================*/
     if (typeof google !== 'undefined' && google.maps) {
