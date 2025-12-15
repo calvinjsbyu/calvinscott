@@ -893,6 +893,15 @@ ul.nav > li > a.active{
     background-image: none !important;
     background-color: #111 !important;
 }
+/* Hide YouTube video title */
+.mb_YTPTitle,
+.mbYTP_wrapper::before,
+.mbYTP_wrapper::after,
+[id*="ytp-caption"],
+.ytp-title,
+.ytp-chrome-top {
+    display: none !important;
+}
 .hero-section{
     /* CSS custom properties for spotlight - updated via JS */
     --mouse-x: -9999px;
