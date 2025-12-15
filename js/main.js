@@ -161,7 +161,7 @@ function getMediaContent(item) {
 
     if (path.startsWith('youtube:')) {
         var videoId = path.replace('youtube:', '');
-        return '<iframe src="https://www.youtube.com/embed/' + videoId + '" frameborder="0" allowfullscreen></iframe>';
+        return '<iframe src="https://www.youtube-nocookie.com/embed/' + videoId + '?rel=0&modestbranding=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
     }
 
     if (path.startsWith('soundcloud:')) {
@@ -284,7 +284,14 @@ function loadPortfolioItem(index) {
     // Set text
     $('.modal-title').text(title);
     $('.modal-category').text(category);
-    $('.modal-description').text(description);
+    $('.modal-description').html(description);
+
+    // Show/hide inner navigation arrows based on item count
+    if (modalItems.length <= 1) {
+        $('.modal-prev, .modal-next').hide();
+    } else {
+        $('.modal-prev, .modal-next').show();
+    }
 }
 
 // Open modal
