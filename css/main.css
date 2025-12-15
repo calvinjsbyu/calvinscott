@@ -262,7 +262,7 @@ button{
 .default-btn{
     font-family: "Open Sans",sans-serif;
     letter-spacing: 2px;
-    background-color: #ff4c4c;
+    background-color: rgb(65, 126, 29);
     color: #ddd;
     line-height: 45px;
     display: inline-block;
@@ -674,7 +674,7 @@ ul.nav > li > a.active{
 }
 .service-content i{
     font-size: 40px;
-    color: #ff4c4c;
+    color: rgb(65, 126, 29);
     margin-bottom: 15px;
 }
 .service-content h3{
